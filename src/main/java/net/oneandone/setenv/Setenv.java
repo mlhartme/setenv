@@ -24,7 +24,7 @@ public class Setenv implements Runnable {
         Setenv result;
 
         str = System.getenv("SETENV_BASE");
-        result = new Setenv(new PrintWriter(System.out), str == null ? null : Paths.get(str + "-" + pid()));
+        result = new Setenv(new PrintWriter(System.out, true), str == null ? null : Paths.get(str + "-" + pid()));
         Runtime.getRuntime().addShutdownHook(new Thread(result));
         return result;
     }
@@ -66,7 +66,7 @@ public class Setenv implements Runnable {
     @Override
     public void run() {
         if (dest == null) {
-            messages.println(toString());
+            messages.print(toString());
         } else {
             try {
                 save();

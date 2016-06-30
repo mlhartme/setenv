@@ -1,9 +1,11 @@
 export SETENV_BASE=/tmp/setenv-$$
 
 doSetenv() {
-    for name in ${SETENV_BASE}-*; do
-        [ -f "${name}" ] || break
-        echo "source $file"
+    for file in ${SETENV_BASE}-*; do
+        if [ -f "${file}" ] ; then
+            . ${file}
+            rm ${file}
+        fi
     done
 }
 
