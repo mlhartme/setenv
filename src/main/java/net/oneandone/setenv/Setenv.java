@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -61,7 +62,7 @@ public class Setenv implements Runnable {
         return dest != null;
     }
 
-    public byte[] setenvBash() {
+    public String setenvBash() {
         byte[] buffer = new byte[2];
         InputStream src;
         ByteArrayOutputStream dest;
@@ -76,7 +77,11 @@ public class Setenv implements Runnable {
                 throw new IllegalStateException(e);
             }
             if (count == -1) {
-                return dest.toByteArray();
+                try {
+                    return new String(dest.toByteArray(), "UTF8");
+                } catch (UnsupportedEncodingException e) {
+                    throw new IllegalStateException(e);
+                }
             }
             dest.write(buffer, 0, count);
         }
