@@ -61,7 +61,7 @@ public class Setenv implements Runnable {
         return dest != null;
     }
 
-    public byte[] setenvBash() throws IOException {
+    public byte[] setenvBash() {
         byte[] buffer = new byte[2];
         InputStream src;
         ByteArrayOutputStream dest;
@@ -70,7 +70,11 @@ public class Setenv implements Runnable {
         src = getClass().getResourceAsStream("/setenv.bash");
         dest = new ByteArrayOutputStream();
         while (true) {
-            count = src.read(buffer);
+            try {
+                count = src.read(buffer);
+            } catch (IOException e) {
+                throw new IllegalStateException(e);
+            }
             if (count == -1) {
                 return dest.toByteArray();
             }
