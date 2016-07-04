@@ -1,6 +1,8 @@
 package net.oneandone.setenv;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
@@ -53,6 +55,27 @@ public class Setenv implements Runnable {
         this.dest = dest;
         this.cd = null;
         this.map = new LinkedHashMap<>();
+    }
+
+    public boolean isConfigured() {
+        return dest != null;
+    }
+
+    public byte[] setenvBash() throws IOException {
+        byte[] buffer = new byte[2];
+        InputStream src;
+        ByteArrayOutputStream dest;
+        int count;
+
+        src = getClass().getResourceAsStream("/setenv.bash");
+        dest = new ByteArrayOutputStream();
+        while (true) {
+            count = src.read(buffer);
+            if (count == -1) {
+                return dest.toByteArray();
+            }
+            dest.write(buffer, 0, count);
+        }
     }
 
     public void cd(String path) {

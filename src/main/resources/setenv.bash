@@ -1,12 +1,17 @@
-export SETENV_BASE=/tmp/setenv-$$
+# setup https://github.com/mlhartme/setenv
 
-doSetenv() {
-    for file in ${SETENV_BASE}-*; do
-        if [ -f "${file}" ] ; then
-            . ${file}
-            rm ${file}
-        fi
-    done
-}
+if [ -z ${SETENV_BASE} ] ; then
+    export SETENV_BASE=/tmp/setenv-$$
 
-PROMPT_COMMAND=doSetenv
+    doSetenv() {
+        for file in ${SETENV_BASE}-*; do
+            if [ -f "${file}" ] ; then
+                . ${file}
+                rm ${file}
+            fi
+        done
+    }
+    PROMPT_COMMAND=doSetenv
+else
+    # already initialized, nothing to do
+fi
