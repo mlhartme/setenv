@@ -12,6 +12,6 @@ if [ -z ${SETENV_BASE} ] ; then
         done
     }
     PROMPT_COMMAND=doSetenv
-else
-    # already initialized, nothing to do
+# else
+#   already initialized, nothing to do
 fi
