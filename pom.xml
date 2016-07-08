@@ -9,11 +9,11 @@
   </parent>
 
   <name>Setenv</name>
-  <description></description>
+  <description />
 
   <groupId>net.oneandone</groupId>
   <artifactId>setenv</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 
   <packaging>jar</packaging>
 
@@ -23,7 +23,7 @@
     <url>https://github.com/mlhartme/setenv</url>
     <connection>scm:git:ssh://git@github.com/mlhartme/setenv.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mlhartme/setenv.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>setenv-1.0.0</tag>
   </scm>
 
   <developers>
