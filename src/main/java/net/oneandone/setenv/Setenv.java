@@ -24,8 +24,8 @@ import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Setenv implements Runnable {
     private static Setenv lazySetenv;
@@ -63,14 +63,12 @@ public class Setenv implements Runnable {
 
     private PrintWriter messages;
     private final Path dest;
-    private String cd;
-    private Map<String, String> map;
+    private List<String> lines;
 
     public Setenv(PrintWriter messages, Path dest) {
         this.messages = messages;
         this.dest = dest;
-        this.cd = null;
-        this.map = new LinkedHashMap<>();
+        this.lines = new ArrayList<>();
     }
 
     public boolean isConfigured() {
@@ -103,11 +101,15 @@ public class Setenv implements Runnable {
     }
 
     public void cd(String path) {
-        this.cd = path;
+        line("cd " + path);
     }
 
     public void set(String key, String value) {
-        map.put(key, value);
+        line("export " + key + "='" + value + "'\n");
+    }
+
+    public void line(String line) {
+        lines.add(line);
     }
 
     @Override
@@ -131,11 +133,8 @@ public class Setenv implements Runnable {
         StringBuilder result;
 
         result = new StringBuilder();
-        if (cd != null) {
-            result.append("cd " + cd + "\n");
-            for (Map.Entry<String, String> entry : map.entrySet()) {
-                result.append("export " + entry.getKey() + "='" + entry.getValue() + "'\n");
-            }
+        for (String line : lines) {
+            result.append(line).append('\n');
         }
         return result.toString();
     }
