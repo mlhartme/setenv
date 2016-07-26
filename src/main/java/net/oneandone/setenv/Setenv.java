@@ -101,11 +101,52 @@ public class Setenv implements Runnable {
     }
 
     public void cd(String path) {
-        line("cd " + path);
+        line("cd " + escape(path));
     }
 
     public void set(String key, String value) {
-        line("export " + key + "='" + value + "'\n");
+        line("export " + key + "=" + escape(value) + "\n");
+    }
+
+    public static String escape(String str) {
+        StringBuilder result;
+        char c;
+
+        result = new StringBuilder();
+        for (int i = 0, max = str.length(); i < max; i++) {
+            c = str.charAt(i);
+            // see http://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html, 2.2 Quoting
+            switch (c) {
+                case '|':
+                case '&':
+                case ';':
+                case '<':
+                case '>':
+                case '(':
+                case ')':
+                case '$':
+                case '`':
+                case '\\':
+                case '"':
+                case '\'':
+                case ' ':
+                case '\t':
+                case '\n':
+
+                case '*':
+                case '?':
+                case '[':
+                case '#':
+                case '~':
+                case '=':
+                case '%':
+                    result.append('\\').append(c);
+                    break;
+                default:
+                    result.append(c);
+            }
+        }
+        return result.toString();
     }
 
     public void line(String line) {
