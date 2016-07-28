@@ -1,6 +1,6 @@
 ## Changelog
 
-### 1.0.2 (pending)
+### 1.0.2 (2016-07-28)
 
 * fix quoting of special characters in Setenv.cd and Setenv.set.
 
