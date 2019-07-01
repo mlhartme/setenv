@@ -1,8 +1,8 @@
 ## setenv
 
-Set environment variables and the currend directory in the user's shell.
+Set environment variables and the current directory in the user's shell.
 
 ### setup
 
-Source setenv.bash in one of your bash initialization scripts.
+Source setenv.sh in one of your bash or zsh initialization scripts.
 
