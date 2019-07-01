@@ -2,7 +2,12 @@
 
 Set environment variables and the current directory in the user's shell.
 
-### setup
+### application setup
 
-Source setenv.sh in one of your bash or zsh initialization scripts.
+Add a dependency and invoke the Setenv class.
+
+
+### user setup
+
+Source setenv.rc in one of your bash or zsh initialization scripts.
 
