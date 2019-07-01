@@ -78,11 +78,11 @@ public class Setenv implements Runnable {
     public String setenvBash() {
         byte[] buffer = new byte[2];
         InputStream src;
-        ByteArrayOutputStream dest;
+        ByteArrayOutputStream bytes;
         int count;
 
         src = getClass().getResourceAsStream("/setenv.bash");
-        dest = new ByteArrayOutputStream();
+        bytes = new ByteArrayOutputStream();
         while (true) {
             try {
                 count = src.read(buffer);
@@ -91,12 +91,12 @@ public class Setenv implements Runnable {
             }
             if (count == -1) {
                 try {
-                    return new String(dest.toByteArray(), "UTF8");
+                    return new String(bytes.toByteArray(), "UTF8");
                 } catch (UnsupportedEncodingException e) {
                     throw new IllegalStateException(e);
                 }
             }
-            dest.write(buffer, 0, count);
+            bytes.write(buffer, 0, count);
         }
     }
 

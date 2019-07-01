@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.0.3 (pending)
+
+* update lazy-foss-parent 1.0.1 to 1.3.0; checkstyle fixes
+
 ### 1.0.2 (2016-07-28)
 
 * fix quoting of special characters in Setenv.cd and Setenv.set.
