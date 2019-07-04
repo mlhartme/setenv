@@ -11,3 +11,4 @@ Add a dependency and invoke the Setenv class.
 
 Source setenv.rc in one of your bash or zsh initialization scripts.
 
+Note: if you need to source the file but want to disable it: set SETENV_BASE to a none empty value.

@@ -2,8 +2,10 @@
 
 ### 1.0.3 (pending)
 
-* added zsh support
-* added error message if shell is unknown or unsupported
+* setenv.rc
+  * skip setup if not interactive
+  * added zsh support
+  * added error message if shell is unknown or unsupported
 * update lazy-foss-parent 1.0.1 to 1.3.0; checkstyle fixes
 
 

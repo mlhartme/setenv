@@ -1,5 +1,9 @@
 ## setup https://github.com/mlhartme/setenv
 
+if [ -z "$PS1" ]; then
+    return   # nothing to do -- not interactive
+fi
+
 if [ -z "${SETENV_BASE}" ] ; then
     if [ -n "${ZSH_VERSION}" ] ; then
       # see https://unix.stackexchange.com/questions/94129/is-there-something-like-closures-for-zsh
@@ -30,8 +34,8 @@ if [ -z "${SETENV_BASE}" ] ; then
       }
       PROMPT_COMMAND=doSetenv
     else
-      echo "unknown shell"
-      exit
+      echo "setenv.rc failed: unknown shell"
+      return 1  # this file is sourced, so don't use exit!
     fi
 
 # else
